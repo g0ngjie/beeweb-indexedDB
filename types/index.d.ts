@@ -12,6 +12,7 @@ export default class BrowserDB {
     private storeName;
     private targetIndex;
     private dataBase;
+    version: number;
     load: boolean;
     /**
      * 构造器
@@ -31,9 +32,11 @@ export default class BrowserDB {
      * });
      * ```
      */
-    constructor(dbName: string, storeName: string, targetIndex: TIndex[]);
+    constructor(dbName: string, storeName: string, targetIndex: TIndex[], version?: number);
     /**初始化 */
     initDatabase(): Promise<TResponse>;
+    /**获取Store列表 */
+    getStoreNames(): string[];
     /**开启事务 */
     openTransaction(): Promise<IDBObjectStore>;
     /**

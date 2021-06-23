@@ -16,6 +16,8 @@ export default class BrowserDB {
     // 索引
     private targetIndex: TIndex[];
     private dataBase: any;
+    // 版本
+    public version: number;
     // 加载完毕
     public load: boolean = false;
     /**
@@ -36,11 +38,12 @@ export default class BrowserDB {
      * });
      * ```
      */
-    constructor(dbName: string, storeName: string, targetIndex: TIndex[]) {
+    constructor(dbName: string, storeName: string, targetIndex: TIndex[], version: number = 1) {
         if (!window.indexedDB) throw new Error("Current browser does not support");
         this.dbName = dbName;
         this.storeName = storeName;
         this.targetIndex = targetIndex;
+        this.version = version;
         this.initDatabase().then(({ ok, err, message }: TResponse) => {
             this.load = ok;
             if (!ok) {
@@ -53,7 +56,7 @@ export default class BrowserDB {
     /**初始化 */
     initDatabase(): Promise<TResponse> {
         return new Promise((resolve) => {
-            const DB: IDBOpenDBRequest = indexedDB.open(this.dbName);
+            const DB: IDBOpenDBRequest = indexedDB.open(this.dbName, this.version);
             DB.onerror = (e: any) => {
                 resolve({
                     ok: false,
@@ -98,6 +101,19 @@ export default class BrowserDB {
                 }
             };
         });
+    }
+
+    /**获取Store列表 */
+    getStoreNames(): string[] {
+        const domStrings: DOMStringList = this.dataBase.objectStoreNames;
+        const names = [];
+        for (const key in domStrings) {
+            if (Object.prototype.hasOwnProperty.call(domStrings, key)) {
+                const name = domStrings[key];
+                names.push(name)
+            }
+        }
+        return names;
     }
 
     /**开启事务 */
