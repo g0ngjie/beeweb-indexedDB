@@ -1,4 +1,6 @@
-import CommonDB from "../lib/index.js";
+import Vue from "vue";
+import CommonDB from "../../lib/index";
+Vue.config.productionTip = false;
 
 const db = new CommonDB("testDatabase", "person", {
   name: false,
@@ -8,8 +10,8 @@ const db = new CommonDB("testDatabase", "person", {
 setTimeout(async () => {
   console.log("[debug]db.load:", db.load);
   if (db.load) {
-    const create = await db.create({ _id: 1});
-    console.log("[debug]create:", create)
+    const create = await db.create({ _id: 1 });
+    console.log("[debug]create:", create);
     // db.clear()
     // const findOne = await db.findOne(6);
     // console.log("[debug]findOne:", findOne);
@@ -27,3 +29,5 @@ setTimeout(async () => {
     // console.log("[debug]deleteById:", deleteById);
   }
 }, 500);
+
+new Vue();
