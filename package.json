@@ -1,16 +1,17 @@
 {
   "name": "@beeweb/indexeddb",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Lightweight database tool for browser",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/g0ngjie/beeweb-indexedDB.git"
   },
-  "keywords": [],
+  "keywords": [
+    "indexedDB",
+    "beeweb",
+    "beeweb-indexeddb"
+  ],
   "files": [
     "lib",
     "types"
