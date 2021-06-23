@@ -225,11 +225,18 @@ export default class BrowserDB {
             const req: IDBRequest = store.get(key);
             req.onsuccess = (e: any) => {
                 const result = e.target.result;
-                resolve({
-                    ok: true,
-                    data: result,
-                    message: "success",
-                });
+                if (result)
+                    resolve({
+                        ok: true,
+                        data: result,
+                        message: "success",
+                    });
+                else {
+                    resolve({
+                        ok: false,
+                        message: 'not found'
+                    })
+                }
             };
             req.onerror = (error: any) => {
                 resolve({

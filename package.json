@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Lightweight database tool for browser",
   "main": "lib/index.js",
+  "typings": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/g0ngjie/beeweb-indexedDB.git"
