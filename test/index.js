@@ -20,7 +20,9 @@ setTimeout(async () => {
     // console.log("[debug]update:", update);
     // const findLimit = await db.findLimit(2);
     // console.log("[debug]findLimit:", findLimit);
-    const findCount = await db.findCount();
-    console.log("[debug]findCount:", findCount);
+    // const findCount = await db.findCount();
+    // console.log("[debug]findCount:", findCount);
+    const deleteById = await db.deleteById(7);
+    console.log("[debug]deleteById:", deleteById);
   }
 }, 500);
