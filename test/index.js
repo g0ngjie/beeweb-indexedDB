@@ -1,6 +1,6 @@
-import CommonDB from "../lib/index.esm.js";
+import CommonDB from "../lib/index.js";
 
-const db = new CommonDB("curdDatabase", "person", {
+const db = new CommonDB("spa_curdDatabase", "person", {
   name: false,
   mobile: false,
 });

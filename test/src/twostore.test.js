@@ -1,7 +1,7 @@
 import CommonDB from "@beeweb/indexeddb";
 
 const db1 = new CommonDB("twostore", "one", { name: false });
-const db2 = new CommonDB("twostore", "two", { name: false });
+const db2 = new CommonDB("twostore", "two", { name: false }, 2);
 setTimeout(async () => {
   if (db2.load) {
     console.log("[debug]db1.load:", db1.load);

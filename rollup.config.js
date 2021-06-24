@@ -21,13 +21,14 @@ const commonConf = {
 // 需要导出的模块类型
 const outputMap = [
   {
-    file: packageJSON.main, // 通用模块
-    format: "umd",
-  },
-  {
-    file: packageJSON.module, // es6模块
+    file: packageJSON.main, // es6模块
     format: "es",
   },
+  // {
+  //   file: packageJSON.module, // commonjs
+  //   format: "cjs",
+  //   exports: "default",
+  // },
 ];
 
 const buildConf = (options) => Object.assign({}, commonConf, options);

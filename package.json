@@ -3,7 +3,6 @@
   "version": "1.0.4",
   "description": "Lightweight database tool for browser",
   "main": "lib/index.js",
-  "module": "lib/index.esm.js",
   "typings": "lib/index.d.ts",
   "repository": {
     "type": "git",
