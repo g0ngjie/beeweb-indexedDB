@@ -57,7 +57,7 @@ export default class BrowserDB {
     }
 
     /**初始化 */
-    initDatabase(): Promise<TResponse> {
+    private initDatabase(): Promise<TResponse> {
         return new Promise((resolve) => {
             const DB: IDBOpenDBRequest = indexedDB.open(this.dbName, this.version);
             DB.onerror = (e: any) => {

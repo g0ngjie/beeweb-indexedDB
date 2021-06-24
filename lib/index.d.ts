@@ -37,7 +37,7 @@ export default class BrowserDB {
      */
     constructor(dbName: string, storeName: string, targetIndex: TIndex, version?: number);
     /**初始化 */
-    initDatabase(): Promise<TResponse>;
+    private initDatabase;
     /**获取Store列表 */
     getStoreNames(): string[];
     /**开启事务 */
