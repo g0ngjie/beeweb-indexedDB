@@ -35,7 +35,7 @@ export default class BrowserDB {
      * new BrowserDB('beewebDatabase', 'table_3', {}, 2)
      * ```
      */
-    constructor(dbName: string, storeName: string, targetIndex: TIndex, version?: number);
+    constructor(dbName: string, storeName: string, targetIndex?: TIndex, version?: number);
     /**初始化 */
     private initDatabase;
     /**开启事务 */

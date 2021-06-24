@@ -41,11 +41,11 @@ export default class BrowserDB {
      * new BrowserDB('beewebDatabase', 'table_3', {}, 2)
      * ```
      */
-    constructor(dbName: string, storeName: string, targetIndex: TIndex, version?: number) {
+    constructor(dbName: string, storeName: string, targetIndex?: TIndex, version?: number) {
         if (!window.indexedDB) throw new Error("Current browser does not support");
         this.dbName = dbName;
         this.storeName = storeName;
-        this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex || {};
         this.version = version;
         this.initDatabase().then(({ ok, err, message }: TResponse) => {
             this.load = ok;
