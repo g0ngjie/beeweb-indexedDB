@@ -12,7 +12,7 @@ export default class BrowserDB {
     private storeName;
     private targetIndex;
     private dataBase;
-    version: number;
+    version: number | undefined;
     load: boolean;
     /**
      * 构造器
@@ -30,9 +30,12 @@ export default class BrowserDB {
      *  name: false,
      *  mobile: true,
      * });
+     * // 数据库新增store
+     * // 通过改变version来增加，新增version不能小于前version
+     * new BrowserDB('beewebDatabase', 'table_3', {}, 2)
      * ```
      */
-    constructor(dbName: string, storeName: string, targetIndex: TIndex[], version?: number);
+    constructor(dbName: string, storeName: string, targetIndex: TIndex, version?: number);
     /**初始化 */
     initDatabase(): Promise<TResponse>;
     /**获取Store列表 */
