@@ -58,7 +58,7 @@ export default class BrowserDB {
 
     /**初始化 */
     private initDatabase(): Promise<TResponse> {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             const DB: IDBOpenDBRequest = indexedDB.open(this.dbName, this.version);
             DB.onerror = (e: any) => {
                 resolve({
@@ -106,6 +106,14 @@ export default class BrowserDB {
         });
     }
 
+    /**开启事务 */
+    private openTransaction(): IDBObjectStore {
+        // 读写权限
+        const transaction: IDBTransaction = this.dataBase.transaction(this.storeName, "readwrite");
+        const store: IDBObjectStore = transaction.objectStore(this.storeName);
+        return store;
+    }
+
     /**获取Store列表 */
     getStoreNames(): string[] {
         const domStrings: DOMStringList = this.dataBase.objectStoreNames;
@@ -119,21 +127,13 @@ export default class BrowserDB {
         return names;
     }
 
-    /**开启事务 */
-    async openTransaction(): Promise<IDBObjectStore> {
-        // 读写权限
-        const transaction: IDBTransaction = this.dataBase.transaction(this.storeName, "readwrite");
-        const store: IDBObjectStore = transaction.objectStore(this.storeName);
-        return store;
-    }
-
     /**
      * 增加
      * @param {object} target 新增对象
      */
     create(target: object): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store: IDBObjectStore = await this.openTransaction();
+        return new Promise(resolve => {
+            const store: IDBObjectStore = this.openTransaction();
             const req: IDBRequest = store.add(target);
             req.onsuccess = (e: any) => {
                 const _id = e.target.result;
@@ -154,8 +154,8 @@ export default class BrowserDB {
 
     /**清空表数据 */
     clear(): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store = await this.openTransaction();
+        return new Promise(resolve => {
+            const store = this.openTransaction();
             const req = store.clear();
             req.onsuccess = () => {
                 resolve({
@@ -177,8 +177,8 @@ export default class BrowserDB {
      * @param {number} _id 主键
      */
     deleteById(_id: number): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store: IDBObjectStore = await this.openTransaction();
+        return new Promise(resolve => {
+            const store: IDBObjectStore = this.openTransaction();
             const req: IDBRequest = store.delete(_id);
             req.onsuccess = (e: any) => {
                 const result = e.target.result;
@@ -203,8 +203,8 @@ export default class BrowserDB {
      * @param {object} data 修改对象
      */
     updateById(key: number, data: object): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store: IDBObjectStore = await this.openTransaction();
+        return new Promise(resolve => {
+            const store: IDBObjectStore = this.openTransaction();
             const req: IDBRequest = store.get(key);
             req.onsuccess = (e: any) => {
                 let result = e.target.result;
@@ -239,8 +239,8 @@ export default class BrowserDB {
      * @param {number} key 主键
      */
     findById(key: number): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store: IDBObjectStore = await this.openTransaction();
+        return new Promise(resolve => {
+            const store: IDBObjectStore = this.openTransaction();
             const req: IDBRequest = store.get(key);
             req.onsuccess = (e: any) => {
                 const result = e.target.result;
@@ -272,8 +272,8 @@ export default class BrowserDB {
      * @param {string} value 值
      */
     find(key: string, value: string): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store: IDBObjectStore = await this.openTransaction();
+        return new Promise(resolve => {
+            const store: IDBObjectStore = this.openTransaction();
             const dbIndex: IDBIndex = store.index(key);
             const req: IDBRequest = dbIndex.getAll(value);
             req.onsuccess = (e: any) => {
@@ -297,8 +297,8 @@ export default class BrowserDB {
      * 查询全部
      */
     findAll(): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store: IDBObjectStore = await this.openTransaction();
+        return new Promise(resolve => {
+            const store: IDBObjectStore = this.openTransaction();
             const req: IDBRequest = store.getAll();
             req.onsuccess = (e: any) => {
                 const result = e.target.result;
@@ -321,8 +321,8 @@ export default class BrowserDB {
      * 获取集合总数
      */
     findCount(): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store: IDBObjectStore = await this.openTransaction();
+        return new Promise(resolve => {
+            const store: IDBObjectStore = this.openTransaction();
             const req: IDBRequest = store.count();
             req.onsuccess = (e: any) => {
                 const count = e.target.result;
@@ -346,8 +346,8 @@ export default class BrowserDB {
      * @param limit 查询条数
      */
     findLimit(limit = 10): Promise<TResponse> {
-        return new Promise(async (resolve) => {
-            const store: IDBObjectStore = await this.openTransaction();
+        return new Promise(resolve => {
+            const store: IDBObjectStore = this.openTransaction();
             const req: IDBRequest = store.openCursor();
             let _limit = 1;
             let list: object[] = [];
