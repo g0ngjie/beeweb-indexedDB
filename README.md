@@ -1,5 +1,7 @@
 # beeweb-indexedDB
 
+Lightweight database tool for browser
+
 ## Installing
 
 ```shell
