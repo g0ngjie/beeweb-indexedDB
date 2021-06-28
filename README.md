@@ -29,4 +29,4 @@ new BrowserDB("dbName", "storeName", targetIndex, version);
 
 ## License
 
-[The ISC License](./LICENSE)
+[The MIT License](./LICENSE)
