@@ -1,6 +1,6 @@
 {
   "name": "@beeweb/indexeddb",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Lightweight database tool for browser",
   "main": "lib/index.js",
   "typings": "types/index.d.ts",
